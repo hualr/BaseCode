@@ -2,23 +2,22 @@
 
 [TOC]
 
-### 
 
 
-
-## 重新理解KMP算法
+## KMP算法
 
 ### 算法解决的问题
 
 1. 关键字符串的查找
 1. next数组解决的问题
-   1. 一般来说,这类的问题就是在考察F数组的算法
+   1. 一般来说,这类的问题就是在考察F数组的算法--这就是我一直不放弃KMP算法的主要原因
+   2. next数组实际上是在计算当前位置的最大前后缀
 
 
 
-## 普通解决方法
+## 普通方法
 
-> 对关键字的字符串和源字符串进行比较,发现出现问题,那么源字符串跳转到下一个字符,而关键字字符串从零开始,继续对比,直到关键字字符串完全走完
+> strLong和strShort从头进行对比,当发现对不到的时候,Long前进一格,Short回到0
 >
 > ``` java
 > public int commoncapare(String str1,String str2){
@@ -118,7 +117,11 @@ public int getIndex(String s1,String s2){
 
 这就得根据![1554384340950](assets/1554384340950.png)
 
-我发现,哥就是个几何习题,一次我们比较的是next[k]是否能和i+1这个字符串能成功,假设可以,那么就在next[k]基础上,next[i+1]=next[k]+1,否则,继续找next[k]值的next[value];
+
+
+![1556780721200](assets/1556780721200.png)
+
+我发现,这就是个几何习题,一次我们比较的是next[k]是否能和i+1这个字符串能成功,假设可以,那么就在next[k]基础上,next[i+1]=next[k]+1,否则,继续找next[k]值的next[value];
 
 这里,我必须引入一个链接https://www.cnblogs.com/tangzhengyue/p/4315393.html
 
