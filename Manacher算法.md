@@ -22,6 +22,7 @@ public char[] manacherString(String str){
     char [] res=new char[str.length()*2+1];
     int index=0;
     for(int i=0;i!=res.length;i++){
+        //这一步处理的非常高明
         res[i]=(i&1)==0?'#':charArr[index++];
     }
     return res;
@@ -34,11 +35,11 @@ public char[] manacherString(String str){
 
 为什么需要该算法
 
-* 如果不使用该算法,
+单纯的对数组进行#扩展,也是完全可以解决该问题的.但是manacher算法本身不复杂,因此可以用来加速
 
 1. 首先,我们需要声明两个定义
-   * 最右边界:回文序列中的最右值,如果一个str中存在多个str,那么最右边界就是回文串的最右的东西
-   * 中心  一个字符串中有很多个回文序列 这就意味着他有多个中心
+   * 最右回文边界:回文序列中的最右值,如果一个str中存在多个str,那么最右边界就是回文串的最右的东西
+   * 最右回文边界的中心 
 2. 四种情况
    * 如果 R在一个中心序列C的左边,那么直接暴力移动
    * 如果R在一个中心序列C的右边
@@ -84,12 +85,14 @@ public int maxLcpsLength(String str){
         	else
                 break;      
         }
+        //找到新的更右回文边界
         if(i+pArr[i]>R){
             R=i+pArr[i];
             C=i;
         }
         max=Math.max(max,pArr[i]);   
     }
+    //parr是个好东西
     //这也是个知识点!!! 因为之前我是扩充了的
     return max-1;
 }
